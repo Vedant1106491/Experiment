@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="billApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bill Payment Record App</title>
+
+  <!-- AngularJS CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body ng-controller="BillController">
+
+  <h1>Bill Payment Record</h1>
+
+  <!-- Add/Edit Form -->
+  <div class="form-container">
+    <input type="text" ng-model="bill.name" placeholder="Bill Name (e.g., Electricity)">
+    <input type="number" ng-model="bill.amount" placeholder="Amount">
+    <input type="date" ng-model="bill.date">
+
+    <button ng-click="addOrUpdateBill()">
+      {{ editIndex === -1 ? 'Add Bill' : 'Update Bill' }}
+    </button>
+  </div>
+
+  <h2>Bill List</h2>
+
+  <table border="1" width="80%">
+    <tr>
+      <th>#</th>
+      <th>Bill Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+
+    <tr ng-repeat="b in bills track by $index">
+      <td>{{$index + 1}}</td>
+      <td>{{b.name}}</td>
+      <td>{{b.amount}}</td>
+      <td>{{b.date | date:'dd-MM-yyyy'}}</td>
+      <td>
+        <button ng-click="editBill($index)">Edit</button>
+        <button ng-click="deleteBill($index)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>

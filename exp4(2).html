@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="registerApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration Form</title>
+
+  <!-- AngularJS CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body ng-controller="RegisterController">
+
+  <h1>User Registration Form</h1>
+
+  <form name="regForm" ng-submit="submitForm(regForm.$valid)" novalidate>
+
+    <!-- Full Name -->
+    <label>Full Name:</label>
+    <input type="text" name="fullname" ng-model="user.fullname"
+      ng-minlength="3" required />
+    <span class="error" ng-show="regForm.fullname.$touched && regForm.fullname.$invalid">
+      Name must be at least 3 characters.
+    </span>
+    <br><br>
+
+    <!-- Email -->
+    <label>Email:</label>
+    <input type="email" name="email" ng-model="user.email" required />
+    <span class="error" ng-show="regForm.email.$touched && regForm.email.$invalid">
+      Enter a valid email.
+    </span>
+    <br><br>
+
+    <!-- Mobile -->
+    <label>Mobile:</label>
+    <input type="text" name="mobile" ng-model="user.mobile"
+      ng-pattern="/^[0-9]{10}$/" required />
+    <span class="error" ng-show="regForm.mobile.$touched && regForm.mobile.$invalid">
+      Enter 10-digit mobile number.
+    </span>
+    <br><br>
+
+    <!-- Password -->
+    <label>Password:</label>
+    <input type="password" name="password" ng-model="user.password"
+      ng-minlength="6" required />
+    <span class="error" ng-show="regForm.password.$touched && regForm.password.$invalid">
+      Password must be at least 6 characters.
+    </span>
+    <br><br>
+
+    <!-- Confirm Password -->
+    <label>Confirm Password:</label>
+    <input type="password" name="cpassword" ng-model="user.cpassword"
+      required />
+    <span class="error" ng-show="user.cpassword && user.cpassword !== user.password">
+      Passwords do not match!
+    </span>
+    <br><br>
+
+    <button type="submit"
+      ng-disabled="regForm.$invalid || user.cpassword !== user.password">
+      Register
+    </button>
+
+  </form>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
